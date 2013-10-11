@@ -374,7 +374,13 @@ function SonicSocket(params) {
 
 SonicSocket.prototype.send = function(input) {
   // Surround the word with start and end characters.
-  input = this.coder.startChar + input + this.coder.endChar;
+  input = this.coder.startChar
+            + input
+            + input // Hack: add input again, so it's more likely it will be heard. Only works for single input
+            + this.coder.endChar
+            + this.coder.endChar; // Add endChar another time
+
+
   var osc = audioContext.createOscillator();
   osc.connect(audioContext.destination);
   osc.start(0);
