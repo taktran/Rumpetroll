@@ -1,9 +1,10 @@
 var SoundTransfer = function() {
-  var URL_MAPPINGS = {
-    0: "http://192.168.3.107:6701/",
-    1: "http://192.168.3.107:6701/?testing"
-  }
-  var ALPHABET = generateAlphabet(URL_MAPPINGS);
+  // var URL_MAPPINGS = {
+  //   0: "http://192.168.3.107:6701/",
+  //   1: "http://192.168.3.107:6701/?testing"
+  // }
+  // var ALPHABET = generateAlphabet(URL_MAPPINGS);
+  var ALPHABET = "0123456789";
   var sonicSocket;
   var sonicServer;
 
@@ -18,7 +19,14 @@ var SoundTransfer = function() {
       sonicServer.stop();
     }
 
-    sonicServer = new SonicServer({alphabet: ALPHABET, debug: debug});
+    // var audibleRangeCoder = new SonicCoder({
+    //   freqMin: 440,
+    //   freqMax: 1760
+    // });
+    sonicServer = new SonicServer({
+      alphabet: ALPHABET,
+      debug: debug
+    });
 
     sonicServer.start();
   };
