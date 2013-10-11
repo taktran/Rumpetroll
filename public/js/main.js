@@ -82,6 +82,13 @@ $(function() {
 		e.preventDefault();
 		window.open($(this).attr('href'));
 	});
+
+	$('.share-link').click(function(e) {
+		var soundTransfer = new SoundTransfer();
+		soundTransfer.initSender();
+
+		soundTransfer.send("0");
+	});
 });
 
 document.body.onselectstart = function() { return false; }
