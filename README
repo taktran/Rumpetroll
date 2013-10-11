@@ -23,6 +23,17 @@ settings.yaml to a public repository.
 	--dev	Launch server and accept connections from any origin.
 	--verbose	Set EventMachine WebSockets to debug mode.
 
+Currently using dev installation, so to run
+
+    bundle exec ruby em/daemon.rb
+
+Then start a server for the front end eg,
+
+    cd public
+    python -m SimpleHTTPServer 6701
+
+Go to `http://localhost:6701/` to view the page. Use IP address if viewing externally.
+
 
 Libraries used:
 
