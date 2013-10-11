@@ -178,7 +178,7 @@ var App = function(aSettings, aCanvas) {
 	};
 
 	app.touchstart = function(e) {
-	  e.preventDefault();
+	  // e.preventDefault(); // Don't prevent, so that links work
 	  mouse.clicking = true;
 
 		if(model.userTadpole) {
