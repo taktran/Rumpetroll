@@ -4,6 +4,12 @@
   soundTransfer.initListener(true);
 
   soundTransfer.onMessage(function(message) {
-    console.log("message:", message);
+    if (message && message.length > 0) {
+      var url = soundTransfer.URL_MAPPINGS[message];
+      console.log("url", url);
+      if (url) {
+        window.location = url;
+      }
+    }
   });
 })();

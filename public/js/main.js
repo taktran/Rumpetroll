@@ -86,8 +86,25 @@ $(function() {
 	var soundTransfer = new SoundTransfer();
 	soundTransfer.initSender();
 	$('.share-link').click(function(e) {
+		var randomNumber = Math.floor(Math.random() * 10);
 
-		soundTransfer.send("1");
+		console.log("random:", randomNumber);
+		soundTransfer.send(randomNumber.toString());
+	});
+
+	$('.listen-link').click(function(e) {
+		var soundTransfer = new SoundTransfer();
+	  soundTransfer.initListener();
+
+	  soundTransfer.onMessage(function(message) {
+	  	if (message && message.length > 0) {
+	  		var url = soundTransfer.URL_MAPPINGS[message];
+	    	console.log("url", url);
+	    	if (url) {
+	    		window.location = url;
+	    	}
+	  	}
+	  });
 	});
 });
 
