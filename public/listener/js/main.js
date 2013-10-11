@@ -1,7 +1,7 @@
 (function() {
   var soundTransfer = new SoundTransfer();
 
-  soundTransfer.initListener();
+  soundTransfer.initListener(true);
 
   soundTransfer.onMessage(function(message) {
     console.log("message:", message);

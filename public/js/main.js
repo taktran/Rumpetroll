@@ -83,11 +83,11 @@ $(function() {
 		window.open($(this).attr('href'));
 	});
 
+	var soundTransfer = new SoundTransfer();
+	soundTransfer.initSender();
 	$('.share-link').click(function(e) {
-		var soundTransfer = new SoundTransfer();
-		soundTransfer.initSender();
 
-		soundTransfer.send("0");
+		soundTransfer.send("1");
 	});
 });
 

@@ -12,16 +12,13 @@ var SoundTransfer = function() {
   }
 
 
-  this.initListener = function(opt_coder) {
+  this.initListener = function(debug) {
     // Stop the sonic server if it is listening.
     if (sonicServer) {
       sonicServer.stop();
     }
-    if (opt_coder) {
-      sonicServer = new SonicServer({coder: opt_coder});
-    } else {
-      sonicServer = new SonicServer({alphabet: ALPHABET, debug: false});
-    }
+
+    sonicServer = new SonicServer({alphabet: ALPHABET, debug: debug});
 
     sonicServer.start();
   };
@@ -30,12 +27,8 @@ var SoundTransfer = function() {
     sonicServer.on('message', fn);
   };
 
-  this.initSender = function(opt_coder) {
-    if (opt_coder) {
-      sonicSocket = new SonicSocket({coder: opt_coder});
-    } else {
-      sonicSocket = new SonicSocket({alphabet: ALPHABET});
-    }
+  this.initSender = function() {
+    sonicSocket = new SonicSocket({alphabet: ALPHABET});
   };
 
   this.send = function(message) {
