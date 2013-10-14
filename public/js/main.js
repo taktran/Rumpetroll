@@ -78,6 +78,13 @@ var addStats = function() {
 if (debug) { addStats(); }
 
 $(function() {
+	// Change room if hash changes
+	window.addEventListener("hashchange", function() {
+		var room = window.location.hash.substr(1, window.location.hash.length);
+		// Room name is hash name
+		app.setRoom(room);
+	}, false);
+
 	$('a[rel=external]').click(function(e) {
 		e.preventDefault();
 		window.open($(this).attr('href'));

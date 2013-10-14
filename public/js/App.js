@@ -13,6 +13,10 @@ var App = function(aSettings, aCanvas) {
 			messageQuota = 5
 	;
 
+	app.setRoom = function(name) {
+		return model.camera.setBackground(name);
+	};
+
 	app.update = function() {
 	  if (messageQuota < 5 && model.userTadpole.age % 50 == 0) { messageQuota++; }
 
@@ -251,12 +255,5 @@ var App = function(aSettings, aCanvas) {
 		webSocket.onmessage 	= app.onSocketMessage;
 
 		webSocketService		= new WebSocketService(model, webSocket);
-
-		// Change room if hash changes
-		window.addEventListener("hashchange", function() {
-			var room = window.location.hash.substr(1, window.location.hash.length);
-			// Room name is hash name
-			model.camera.setBackground(room);
-		}, false);
 	})();
 }
