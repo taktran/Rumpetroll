@@ -11,7 +11,33 @@ var Camera = function(aCanvas, aContext, x, y) {
 	this.maxZoom = 1.8;
 	this.zoom = this.minZoom;
 
-	var backgroundColor = Math.random()*360;
+
+	// Set background colour using hue
+	this.setBackground = function(name) {
+		for (var i = 0; i < rooms.length; i++) {
+			var room = rooms[i];
+			if (room['name'] === name) {
+				backgroundIndex = i;
+				backgroundColor = rooms[i]['hue'];
+				window.location.hash = name;
+			}
+		}
+	}
+
+	// Get background hue
+	this.getBackgroundHue = function() {
+		return backgroundColor;
+	}
+
+	// Hack for room - store elsewhere later
+	var rooms = [
+		{ name: 'red', hue: 350 },
+		{ name: 'green', hue: 120 },
+		{ name: 'blue', hue: 235 }
+	]
+	var backgroundIndex = Math.floor(Math.random() * rooms.length);
+	var backgroundColor;
+	this.setBackground(rooms[backgroundIndex]['name']);
 
 	this.setupContext = function() {
 		var translateX = canvas.width / 2 - camera.x * camera.zoom;
@@ -19,7 +45,7 @@ var Camera = function(aCanvas, aContext, x, y) {
 
 		// Reset transform matrix
 		context.setTransform(1,0,0,1,0,0);
-		context.fillStyle = 'hsl('+backgroundColor+',50%,10%)';
+		context.fillStyle = 'hsl('+backgroundColor+',30%,40%)';
 		context.fillRect(0,0,canvas.width, canvas.height);
 
 		context.translate(translateX, translateY);
@@ -31,8 +57,9 @@ var Camera = function(aCanvas, aContext, x, y) {
 	};
 
 	this.update = function(model) {
-		backgroundColor += 0.08;
-		backgroundColor = backgroundColor > 360 ? 0 : backgroundColor;
+		// Don't change background colour
+		// backgroundColor += 0.08;
+		// backgroundColor = backgroundColor > 360 ? 0 : backgroundColor;
 
 		var targetZoom = (model.camera.maxZoom + (model.camera.minZoom - model.camera.maxZoom) * Math.min(model.userTadpole.momentum, model.userTadpole.maxMomentum) / model.userTadpole.maxMomentum);
 		model.camera.zoom += (targetZoom - model.camera.zoom) / 60;
