@@ -25,13 +25,16 @@ var SoundTransfer = function() {
       sonicServer.stop();
     }
 
-    // var audibleRangeCoder = new SonicCoder({
-    //   freqMin: 440,
-    //   freqMax: 1760
-    // });
+    var audibleRangeCoder = new SonicCoder({
+      freqMin: 440,
+      freqMax: 1760
+    });
     sonicServer = new SonicServer({
       alphabet: ALPHABET,
       debug: debug
+
+      // Audible range
+      // coder: audibleRangeCoder
     });
 
     sonicServer.start();
