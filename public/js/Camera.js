@@ -19,9 +19,13 @@ var Camera = function(aCanvas, aContext, x, y) {
 			if (room['name'] === name) {
 				backgroundIndex = i;
 				backgroundColor = rooms[i]['hue'];
-				window.location.hash = name;
+
+				if (window.location.hash != name) {
+					window.location.hash = name;
+				}
 			}
 		}
+		console.log("Background", name, backgroundColor);
 	}
 
 	// Get background hue

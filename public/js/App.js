@@ -251,5 +251,12 @@ var App = function(aSettings, aCanvas) {
 		webSocket.onmessage 	= app.onSocketMessage;
 
 		webSocketService		= new WebSocketService(model, webSocket);
+
+		// Change room if hash changes
+		window.addEventListener("hashchange", function() {
+			var room = window.location.hash.substr(1, window.location.hash.length);
+			// Room name is hash name
+			model.camera.setBackground(room);
+		}, false);
 	})();
 }
