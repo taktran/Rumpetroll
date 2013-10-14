@@ -93,19 +93,32 @@ $(function() {
 	var soundTransfer = new SoundTransfer();
 	soundTransfer.initSender();
 	$('.share-link').click(function(e) {
-		var randomNumber = Math.floor(Math.random() * 10);
+		// Hack to get rooms changing
+		var roomIndex;
+		switch(window.location.hash) {
+		case "red":
+		  roomIndex = 0;
+		  break;
+	  case "green":
+		  roomIndex = 1;
+		  break;
+		case "blue":
+		  roomIndex = 2;
+		  break;
+		default:
+		  console.log("error in parsing index");
+		}
 
-		console.log("random:", randomNumber);
-		soundTransfer.send(randomNumber.toString());
+		soundTransfer.send(roomIndex);
 	});
 
 	$('.listen-link').click(function(e) {
 		var soundTransfer = new SoundTransfer();
 	  soundTransfer.initListener();
 
-	  soundTransfer.onMessage(function(message) {
-	  	if (message && message.length > 0) {
-	  		var url = soundTransfer.URL_MAPPINGS[message];
+	  soundTransfer.onMessage(function(urlIndex) {
+	  	if (urlIndex && urlIndex.length > 0) {
+	  		var url = soundTransfer.URL_MAPPINGS[urlIndex];
 	    	console.log("url", url);
 	    	if (url) {
 	    		window.location = url;
