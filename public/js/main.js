@@ -93,10 +93,15 @@ $(function() {
 	var soundTransfer = new SoundTransfer();
 	soundTransfer.initSender();
 	$('.share-link').click(function(e) {
-		var randomNumber = Math.floor(Math.random() * 10);
+		// Send current room
+    var currentRoom = window.location.hash;
 
-		console.log("random:", randomNumber);
-		soundTransfer.send(randomNumber.toString());
+    if (currentRoom.length > 1) {
+    	var roomId = _.invert(soundTransfer.URL_MAPPINGS)[currentRoom];
+    	console.log("room", currentRoom, roomId);
+
+			soundTransfer.send(roomId);
+    }
 	});
 
 	$('.listen-link').click(function(e) {
