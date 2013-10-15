@@ -39,8 +39,17 @@ var Camera = function(aCanvas, aContext, x, y) {
 		{ name: 'green', hue: 120 },
 		{ name: 'blue', hue: 235 }
 	]
-	var backgroundIndex = Math.floor(Math.random() * rooms.length);
+	var backgroundIndex;
 	var backgroundColor;
+
+	if (window.location.hash.length > 1) {
+		// Hack to get mappings
+		var soundTransfer = new SoundTransfer();
+		backgroundIndex = _.invert(soundTransfer.URL_MAPPINGS)[window.location.hash];
+	} else {
+		backgroundIndex = 0;
+	}
+
 	this.setBackground(rooms[backgroundIndex]['name']);
 
 	this.setupContext = function() {
