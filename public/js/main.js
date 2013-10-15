@@ -102,6 +102,8 @@ $(function() {
 
 			soundTransfer.send(roomId);
     }
+
+    e.preventDefault();
 	});
 
 	$('.listen-link').click(function(e) {
@@ -117,6 +119,7 @@ $(function() {
 	    	}
 	  	}
 	  });
+	  e.preventDefault();
 	});
 });
 
