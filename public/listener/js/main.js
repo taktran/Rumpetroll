@@ -8,7 +8,8 @@
       var url = soundTransfer.URL_MAPPINGS[message];
       console.log("url", url);
       if (url) {
-        window.location = url;
+        // Hack - just use root url
+        window.location = '/' + url;
       }
     }
   });
