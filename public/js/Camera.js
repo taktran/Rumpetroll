@@ -14,16 +14,12 @@ var Camera = function(aCanvas, aContext, x, y) {
 
 	// Set background colour using hue
 	this.setBackground = function(name) {
-		for (var i = 0; i < rooms.length; i++) {
-			var room = rooms[i];
-			if (room['name'] === name) {
-				backgroundIndex = i;
-				backgroundColor = rooms[i]['hue'];
+		// Hack: Done twice on startup
+		backgroundIndex = _.invert(soundTransfer.URL_MAPPINGS)[window.location.hash];
+		backgroundColor = rooms[backgroundIndex]['hue'];
 
-				if (window.location.hash != name) {
-					window.location.hash = name;
-				}
-			}
+		if (window.location.hash != name) {
+			window.location.hash = name;
 		}
 		console.log("Background", name, backgroundColor);
 	}

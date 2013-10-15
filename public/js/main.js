@@ -83,7 +83,7 @@ $(function() {
 		// var room = window.location.hash.substr(1, window.location.hash.length);
 		var room = window.location.hash;
 		console.log("room", room)
-		$("#concept h2").text(room);
+		$(".room-id").text(room);
 		// Room name is hash name
 		app.setRoom(room);
 	}, false);
